@@ -1,4 +1,4 @@
-// script.js (simplified version)
+// script.js (Fixed Mobile Navigation Version)
 // Global Variables
 let stories = JSON.parse(localStorage.getItem('stories')) || [];
 let currentRating = 0;
@@ -51,25 +51,78 @@ function initializeApp() {
     });
 }
 
-// Setup Event Listeners
+// Setup Event Listeners - FIXED MOBILE NAVIGATION
 function setupEventListeners() {
-    // Mobile menu toggle
+    // Mobile menu toggle - FIXED VERSION
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
     
     if (mobileMenuBtn && navLinks) {
-        mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent event bubbling
             navLinks.classList.toggle('active');
+            
+            // Toggle menu icon
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         });
     }
     
-    // Close mobile menu when clicking outside
+    // Close mobile menu when clicking on links - FIXED
+    const navLinksItems = document.querySelectorAll('.nav-links a');
+    navLinksItems.forEach(link => {
+        link.addEventListener('click', () => {
+            const navLinks = document.querySelector('.nav-links');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const icon = mobileMenuBtn?.querySelector('i');
+            
+            if (navLinks && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+        });
+    });
+    
+    // Close mobile menu when clicking outside - FIXED
     document.addEventListener('click', (e) => {
+        const navLinks = document.querySelector('.nav-links');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        
         if (navLinks && mobileMenuBtn && 
             !navLinks.contains(e.target) && 
             !mobileMenuBtn.contains(e.target) &&
             navLinks.classList.contains('active')) {
+            
             navLinks.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        }
+    });
+    
+    // Close mobile menu on window resize (if resizing to larger screen)
+    window.addEventListener('resize', () => {
+        const navLinks = document.querySelector('.nav-links');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        
+        if (window.innerWidth > 768 && navLinks && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            const icon = mobileMenuBtn?.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         }
     });
     
@@ -77,6 +130,24 @@ function setupEventListeners() {
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', handleContactSubmit);
+        
+        // Character counter for textarea
+        const textarea = contactForm.querySelector('textarea');
+        const charCounter = contactForm.querySelector('.char-counter');
+        if (textarea && charCounter) {
+            textarea.addEventListener('input', function() {
+                const length = this.value.length;
+                charCounter.textContent = `${length}/1000`;
+                
+                if (length > 900) {
+                    charCounter.style.color = '#ff6b6b';
+                } else if (length > 700) {
+                    charCounter.style.color = '#ffa726';
+                } else {
+                    charCounter.style.color = '#ccc';
+                }
+            });
+        }
     }
 }
 
@@ -89,16 +160,23 @@ function loadStories() {
         stories = [
             {
                 id: 1,
-                title: "දිනය 2025 මැයි 11 📅",
+                title: "Emotional Story",
                 description: "A touching story about love and loss",
-                facebookUrl: "https://web.facebook.com/share/p/1L8jV1LZv9/",
+                facebookUrl: "https://facebook.com/yourpage/posts/123456789",
                 image: "assets/DP.jpg"
             },
             {
                 id: 2,
-                title: "හදවතේ හඬ💋"<br> "Chapter 01",
+                title: "Inspirational Journey",
                 description: "Finding strength in difficult times",
                 facebookUrl: "https://facebook.com/yourpage/posts/987654321",
+                image: "assets/DP.jpg"
+            },
+            {
+                id: 3,
+                title: "Love in Silence",
+                description: "Sometimes the loudest love speaks in whispers",
+                facebookUrl: "https://facebook.com/yourpage/posts/456789123",
                 image: "assets/DP.jpg"
             }
         ];
@@ -115,10 +193,21 @@ function renderStoryGallery() {
     const galleryScroll = document.querySelector('.gallery-scroll');
     if (!galleryScroll) return;
 
+    if (stories.length === 0) {
+        galleryScroll.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-book-open"></i>
+                <h3>No Stories Yet</h3>
+                <p>Check back soon for amazing stories!</p>
+            </div>
+        `;
+        return;
+    }
+
     galleryScroll.innerHTML = stories.map(story => `
         <div class="story-card">
             <div class="story-image" onclick="openFacebookStory('${story.facebookUrl}')">
-                <img src="${story.image || 'assets/default-story.jpg'}" alt="${story.title}">
+                <img src="${story.image || 'assets/default-story.jpg'}" alt="${story.title}" onerror="this.src='assets/DP.jpg'">
                 <div class="story-overlay">
                     <div class="sinhala-text">${story.title}</div>
                     <div class="english-text">${story.description}</div>
@@ -178,7 +267,7 @@ function initializeCarousel() {
     
     function showSlide(index) {
         const carousel = document.querySelector('.carousel');
-        if (!carousel) return;
+        if (!carousel || slides.length === 0) return;
         
         currentSlide = (index + slides.length) % slides.length;
         carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
@@ -190,14 +279,33 @@ function initializeCarousel() {
     }
     
     // Auto-advance carousel
-    setInterval(() => {
-        showSlide(currentSlide + 1);
+    const carouselInterval = setInterval(() => {
+        if (slides.length > 0) {
+            showSlide(currentSlide + 1);
+        }
     }, 5000);
     
     // Dot click events
     dots.forEach((dot, i) => {
         dot.addEventListener('click', () => showSlide(i));
     });
+    
+    // Pause carousel on hover
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (carouselContainer) {
+        carouselContainer.addEventListener('mouseenter', () => {
+            clearInterval(carouselInterval);
+        });
+        
+        carouselContainer.addEventListener('mouseleave', () => {
+            clearInterval(carouselInterval);
+            setInterval(() => {
+                if (slides.length > 0) {
+                    showSlide(currentSlide + 1);
+                }
+            }, 5000);
+        });
+    }
 }
 
 // Gallery Scroll Functionality
@@ -212,7 +320,7 @@ function initializeGalleryScroll() {
     function updateScrollProgress() {
         const scrollable = galleryScroll.scrollWidth - galleryScroll.clientWidth;
         const scrolled = galleryScroll.scrollLeft;
-        const progress = (scrolled / scrollable) * 100;
+        const progress = scrollable > 0 ? (scrolled / scrollable) * 100 : 0;
         if (scrollProgress) {
             scrollProgress.style.width = `${progress}%`;
         }
@@ -247,7 +355,7 @@ function initializeReadingProgress() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100;
         
-        progressBar.style.width = `${scrollPercent}%`;
+        progressBar.style.width = `${Math.min(scrollPercent, 100)}%`;
     });
 }
 
@@ -314,12 +422,14 @@ function contactOnWhatsApp() {
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     
     window.open(url, '_blank');
+    showNotification('Opening WhatsApp...', 'whatsapp');
 }
 
 // Contact Form Handling - WhatsApp Integration
 function handleContactSubmit(e) {
     e.preventDefault();
-    const message = document.getElementById('feedbackMessage').value;
+    const messageInput = document.getElementById('feedbackMessage');
+    const message = messageInput ? messageInput.value : '';
     
     if (!message.trim()) {
         showNotification('Please enter your message', 'error');
@@ -342,7 +452,17 @@ function sendMessageToWhatsApp(message) {
     showNotification('Opening WhatsApp to send your message...', 'success');
     
     // Clear the form
-    document.getElementById('contactForm').reset();
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.reset();
+    }
+    
+    // Reset character counter
+    const charCounter = document.querySelector('.char-counter');
+    if (charCounter) {
+        charCounter.textContent = '0/1000';
+        charCounter.style.color = '#ccc';
+    }
 }
 
 // WhatsApp Integration Functions
@@ -365,86 +485,57 @@ function showNotification(message, type = 'info') {
     
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
+    
+    let icon = '';
+    if (type === 'facebook') {
+        icon = '<i class="fab fa-facebook" style="margin-right: 8px;"></i>';
+        notification.style.background = 'linear-gradient(135deg, #1877F2, #0D5CB6)';
+    } else if (type === 'whatsapp') {
+        icon = '<i class="fab fa-whatsapp" style="margin-right: 8px;"></i>';
+        notification.style.background = 'linear-gradient(135deg, #25D366, #128C7E)';
+    } else if (type === 'success') {
+        icon = '<i class="fas fa-check" style="margin-right: 8px;"></i>';
+        notification.style.background = 'linear-gradient(135deg, #00b894, #00a085)';
+    } else if (type === 'error') {
+        icon = '<i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i>';
+        notification.style.background = 'linear-gradient(135deg, #ff7675, #e84393)';
+    } else {
+        notification.style.background = 'linear-gradient(135deg, #0033FF, #0066FF)';
+    }
+
     notification.innerHTML = `
         <div class="notification-content">
-            <span class="notification-message">${message}</span>
+            <span class="notification-message">${icon}${message}</span>
             <button class="notification-close">&times;</button>
         </div>
     `;
-    
-    // Add styles if not already added
-    if (!document.querySelector('#notification-styles')) {
-        const styles = document.createElement('style');
-        styles.id = 'notification-styles';
-        styles.textContent = `
-            .notification {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: #0033FF;
-                color: white;
-                padding: 1rem 1.5rem;
-                border-radius: 10px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-                z-index: 10000;
-                animation: slideInRight 0.3s ease;
-                max-width: 400px;
-            }
-            .notification-success { background: linear-gradient(135deg, #00b894, #00a085); }
-            .notification-error { background: linear-gradient(135deg, #ff7675, #e84393); }
-            .notification-warning { background: linear-gradient(135deg, #fdcb6e, #e17055); }
-            .notification-facebook { background: linear-gradient(135deg, #1877F2, #0D5CB6) !important; }
-            .notification-content {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 1rem;
-            }
-            .notification-close {
-                background: none;
-                border: none;
-                color: white;
-                font-size: 1.2rem;
-                cursor: pointer;
-                padding: 0;
-                width: 24px;
-                height: 24px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 50%;
-                transition: background-color 0.3s ease;
-            }
-            .notification-close:hover {
-                background-color: rgba(255, 255, 255, 0.2);
-            }
-            @keyframes slideInRight {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-        `;
-        document.head.appendChild(styles);
-    }
-    
+
     document.body.appendChild(notification);
-    
+
     // Add close event
     notification.querySelector('.notification-close').addEventListener('click', () => {
         notification.remove();
     });
-    
+
     // Auto remove after 5 seconds
     setTimeout(() => {
         if (notification.parentNode) {
             notification.remove();
         }
     }, 5000);
+}
+
+// Utility Functions
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }
 
 // Export functions for global access
