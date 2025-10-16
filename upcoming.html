@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Under Maintenance - 𝙻 𝚄 𝙲 𝚈</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="assets/DP.jpg" alt="𝙻 𝚄 𝙲 𝚈 Logo" class="logo-image">
+                <span class="logo-text">𝙻 𝚄 𝙲 𝚈</span>
+            </div>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="about.html#contacts">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Maintenance Section -->
+    <section class="maintenance">
+        <div class="container">
+            <div class="maintenance-container">
+                <div class="maintenance-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                
+                <h1>Under Maintenance</h1>
+                
+                <div class="maintenance-message">
+                    <p>We're working hard to improve your experience!</p>
+                    <p>Our website is currently undergoing scheduled maintenance to bring you even better stories and features.</p>
+                </div>
+                
+                <div class="maintenance-details">
+                    <div class="maintenance-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Estimated Time</h3>
+                        <p>We'll be back online as soon as possible</p>
+                    </div>
+                    
+                    <div class="maintenance-card">
+                        <i class="fas fa-heart"></i>
+                        <h3>Thank You</h3>
+                        <p>Thank you for your patience and understanding</p>
+                    </div>
+                    
+                    <div class="maintenance-card">
+                        <i class="fas fa-book"></i>
+                        <h3>New Stories</h3>
+                        <p>Exciting new stories coming your way soon!</p>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <h3>Maintenance Progress</h3>
+                    <div class="progress-bar-maintenance">
+                        <div class="progress-fill" style="width: 75%"></div>
+                    </div>
+                    <p class="progress-text">75% Complete</p>
+                </div>
+                
+                <div class="social-links-maintenance">
+                    <p>Follow us for updates:</p>
+                    <div class="social-icons-maintenance">
+                        <a href="https://facebook.com/yourpagename" target="_blank" class="social-icon-maintenance">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://wa.me/94781689772" target="_blank" class="social-icon-maintenance">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://tiktok.com/@lucy_official44" target="_blank" class="social-icon-maintenance">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="emergency-contact">
+                    <p>For urgent matters, you can still reach us via:</p>
+                    <a href="https://wa.me/94781689772" class="emergency-button">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp Emergency Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-text">&copy; 2025 𝙻 𝚄 𝙲 𝚈. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    
+    <style>
+        .maintenance {
+            padding: 6rem 0;
+            background-color: var(--dark-grey);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .maintenance-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4rem 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-large);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .maintenance-icon {
+            font-size: 4rem;
+            color: var(--deep-blue);
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .maintenance h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .maintenance-message {
+            margin-bottom: 3rem;
+        }
+        
+        .maintenance-message p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: var(--light-grey);
+        }
+        
+        .maintenance-message p:first-child {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+        
+        .maintenance-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .maintenance-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .maintenance-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .maintenance-card i {
+            font-size: 2.5rem;
+            color: var(--deep-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .maintenance-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+        
+        .maintenance-card p {
+            color: var(--light-grey);
+            line-height: 1.5;
+        }
+        
+        .progress-container {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-container h3 {
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+        
+        .progress-bar-maintenance {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+            animation: progressAnimation 2s ease-in-out infinite alternate;
+        }
+        
+        .progress-text {
+            font-weight: 600;
+            color: var(--deep-blue);
+        }
+        
+        .social-links-maintenance {
+            margin-bottom: 3rem;
+        }
+        
+        .social-links-maintenance p {
+            margin-bottom: 1.5rem;
+            color: var(--light-grey);
+        }
+        
+        .social-icons-maintenance {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .social-icon-maintenance {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-icon-maintenance:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 51, 255, 0.4);
+        }
+        
+        .emergency-contact {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .emergency-contact p {
+            margin-bottom: 1.5rem;
+            color: var(--light-grey);
+        }
+        
+        .emergency-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: var(--white);
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+        }
+        
+        .emergency-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+        }
+        
+        @keyframes progressAnimation {
+            0% {
+                opacity: 0.7;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .maintenance-container {
+                padding: 3rem 2rem;
+            }
+            
+            .maintenance h1 {
+                font-size: 2.5rem;
+            }
+            
+            .maintenance-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .maintenance-card {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .maintenance-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .maintenance h1 {
+                font-size: 2rem;
+            }
+            
+            .maintenance-icon {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</body>
+</html>

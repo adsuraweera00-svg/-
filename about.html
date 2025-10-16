@@ -1,0 +1,189 @@
+<!-- about.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - 𝙻 𝚄 𝙲 𝚈</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="assets/DP.jpg" alt="𝙻 𝚄 𝙲 𝚈 Logo" class="logo-image">
+                <span class="logo-text">𝙻 𝚄 𝙲 𝚈</span>
+            </div>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="#contacts">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <h1>About Us</h1>
+            <div class="about-content">
+                <p>Welcome to our world of stories. I write from the heart — about love, pain, friendship, and real emotions that we all feel but rarely say. Every story here is a piece of life, written to touch yours. If our words make you smile, cry, or remember someone special, then my purpose is complete.Thank you for being here. Let's feel these stories together.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title">Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="avatar">
+                        <img src="assets/owner.jpg" alt="Lead Storyteller">
+                    </div>
+                    <div class="team-role">OWNER</div>
+                    <h3 class="team-name">Aminda</h3>
+                    <p class="team-desc">Aminda is the creative force behind 𝙻 𝚄 𝙲 𝚈, crafting each story with emotional depth and authenticity. Her vision guides the platform's mission to connect hearts through words.</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="avatar">
+                        <img src="assets/admin.jpg" alt="Content Curator">
+                    </div>
+                    <div class="team-role">Content Curator</div>
+                    <h3 class="team-name">Linaya</h3>
+                    <p class="team-desc">Linaya manages the daily operations of 𝙻 𝚄 𝙲 𝚈, ensuring a seamless experience for our readers and maintaining the quality and consistency of our content.</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="avatar">
+                        <img src="assets/mod.jpg" alt="Community Manager">
+                    </div>
+                    <div class="team-role">Moderator</div>
+                    <h3 class="team-name">Kawidu</h3>
+                    <p class="team-desc">Kawidu ensures our community remains a safe and supportive space, moderating discussions and helping readers connect with each other and our stories.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Contacts Section -->
+<section id="contacts" class="contacts">
+    <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contacts-container">
+            <div class="contact-message">
+                <h3>Connect With Us</h3>
+                <p>We'd love to hear from you! Whether you have feedback, suggestions, or just want to share your love for stories, feel free to reach out.</p>
+                
+                <!-- Rating System -->
+                <div class="rating">
+                    <p>Rate Our Stories</p>
+                    <div class="stars">
+                        <span class="star" data-rating="1">★</span>
+                        <span class="star" data-rating="2">★</span>
+                        <span class="star" data-rating="3">★</span>
+                        <span class="star" data-rating="4">★</span>
+                        <span class="star" data-rating="5">★</span>
+                    </div>
+                    <p>Click on the stars to rate our stories</p>
+                </div>
+                
+                <!-- Quick Contact Buttons -->
+                <div class="quick-contact">
+                    <h4>Quick Contact</h4>
+                    <div class="contact-buttons">
+                        <button class="contact-btn whatsapp-btn" onclick="quickWhatsAppMessage('I have a general inquiry')">
+                            <i class="fab fa-whatsapp"></i>
+                            General Inquiry
+                        </button>
+                        <button class="contact-btn whatsapp-btn" onclick="quickWhatsAppMessage('I want to report an issue')">
+                            <i class="fab fa-whatsapp"></i>
+                            Report Issue
+                        </button>
+                        <button class="contact-btn whatsapp-btn" onclick="quickWhatsAppMessage('I have a story suggestion')">
+                            <i class="fab fa-whatsapp"></i>
+                            Story Suggestion
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Social Media Links -->
+                <div class="social-icons">
+                    <div class="social-icon" onclick="shareOnFacebook()">
+                        <i class="fab fa-facebook"></i>
+                        <button class="social-button">Facebook</button>
+                    </div>
+                    <div class="social-icon" onclick="shareOnTikTok()">
+                        <i class="fab fa-tiktok"></i>
+                        <button class="social-button">TikTok</button>
+                    </div>
+                    <div class="social-icon" onclick="contactOnWhatsApp()">
+                        <i class="fab fa-whatsapp"></i>
+                        <button class="social-button">WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="feedback-box">
+                <h3>Send Us a Message via WhatsApp</h3>
+                <p class="whatsapp-description">Your message will be sent directly to our WhatsApp. We typically respond within 24 hours.</p>
+                
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="feedbackMessage">Your Message:</label>
+                        <textarea id="feedbackMessage" name="message" 
+                                  placeholder="Type your message here... We'd love to hear your feedback, questions, or story suggestions!" 
+                                  required
+                                  maxlength="1000"></textarea>
+                        <div class="char-counter">0/1000</div>
+                    </div>
+                    <button type="submit" class="submit-btn whatsapp-submit">
+                        <i class="fab fa-whatsapp"></i>
+                        Send via WhatsApp
+                    </button>
+                </form>
+                
+                <!-- Alternative Contact Methods -->
+                <div class="alternative-contact">
+                    <h4>Other Ways to Reach Us</h4>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <span>Email: Updating...</span>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-phone"></i>
+                            <span>Phone: +94 781 689 772</span>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-clock"></i>
+                            <span>Response Time: 24-48 hours</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-text">&copy; 2025 𝙻 𝚄 𝙲 𝚈. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
